@@ -12,6 +12,9 @@ exclude = [
     "input.txt",
     "output.txt",
     "108-Principles-Emma-Dearborn.md",
+    ".cargo_vcs_info.json",
+    ".gitignore",
+    "Cargo.toml.orig"
 ]
 
 [dependencies]
