@@ -1,5 +1,10 @@
 [package]
 name = "emdb_lib"
+license = "MIT"
+description = "Orthographic token compression"
+homepage = "https://dearborn.cc"
+repository = "https://github.com/gsspdev/emdb_lib"
+readme = "README.md"
 version = "0.1.0"
 edition = "2021"
 
