@@ -11,7 +11,10 @@ exclude = [
     ".idea/*",
     "input.txt",
     "output.txt",
-    "108-Principles-Emma-Dearborn.md"
+    "108-Principles-Emma-Dearborn.md",
+    ".gitignore",
+    "Cargo.toml.orig",
+    ".cargo_vcs_info.json"
 ]
 
 [dependencies]
