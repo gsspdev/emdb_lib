@@ -5,7 +5,7 @@ description = "Orthographic token compression"
 homepage = "https://dearborn.cc"
 repository = "https://github.com/gsspdev/emdb_lib"
 readme = "README.md"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 exclude = [
     ".idea/*",
