@@ -1,7 +1,7 @@
 // use regex::Regex;
 
 pub fn test_module_file() {
-    println!("src/word_beginnings.rs connected");
+    println!("words/beginnings.rs connected");
 }
 
 pub fn init_un_to_u(word: &str) -> String {

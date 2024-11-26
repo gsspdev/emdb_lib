@@ -1,7 +1,7 @@
 use regex::Regex;
 
 pub fn test_module_file() {
-    println!("src/punctuation.rs connected");
+    println!("punctuation.rs connected");
 }
 
 pub fn substitute_punctuation(content: &str) -> String {

@@ -1,5 +1,5 @@
 pub fn test_module_file() {
-    println!("src/word_finals_freq.rs connected");
+    println!("words/endings_freq.rs connected");
 }
 
 pub fn final_ly_ily_to_l(word: &str) -> String {

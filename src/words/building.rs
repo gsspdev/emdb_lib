@@ -1,5 +1,5 @@
 pub fn test_module_file() {
-    println!("src/word_building.rs connected");
+    println!("words/buildings.rs connected");
 }
 
 //## Word-building Rules
