@@ -7,6 +7,12 @@ repository = "https://github.com/gsspdev/emdb_lib"
 readme = "README.md"
 version = "0.1.0"
 edition = "2021"
+exclude = [
+    ".idea/*",
+    "input.txt".
+    "output.txt",
+    "target/*"
+]
 
 [dependencies]
 clap = { version = "4.5.21", features = ["derive"] }
