@@ -11,7 +11,7 @@ exclude = [
     ".idea/*",
     "input.txt",
     "output.txt",
-    "target/*"
+    "100-Principles-Emma-Dearborn.md"
 ]
 
 [dependencies]
