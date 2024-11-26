@@ -245,7 +245,7 @@ The Speedwriting Dictionary offers write-by-Principle alternatives for many of t
 
 Most of the Speedwriting word-endings are presented in the final section of this document. The word-endings listed here are used so often that it is advisable to introduce them now so you can appreciate the example words in the following sections.
 
-(9) Write the letter l to express the word-endings -ly and -ily. The textbook also mentions -ley but this is rarely used apart from arbitrary word-sign for “valley.”
+(9) [Implemented] Write the letter l to express the word-endings -ly and -ily. The textbook also mentions -ley but this is rarely used apart from arbitrary word-sign for “valley.”
 
 ```
 nel = nearly
@@ -254,7 +254,7 @@ fml = family
 hml = homily
 ```
 
-(14) Write the letter g to express the word-endings -ing and -thing.
+(14) [Implemented] Write the letter g to express the word-endings -ing and -thing.
 
 ```
 nog = knowing
@@ -263,7 +263,7 @@ n,g = anything
 evg = everything
 ```
 
-(47) Write the letter y to represent medial or final -ary, -ery, -iry, -ory, -ury (and sometimes variations such as -airy and -ari-).
+(47) [Partially Implemented[ Write the letter y to represent medial or final -ary, -ery, -iry, -ory, -ury (and sometimes variations such as -airy and -ari-).
 
 ```
 fy = fairy             nfyx = nefarious
