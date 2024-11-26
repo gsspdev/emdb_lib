@@ -4,10 +4,11 @@ pub mod phonetics;
 pub mod phoneme_clusters;
 pub mod words;
 pub mod types;
-pub mod suffixes;
-pub mod prefixes;
-use crate::suffixes::SuffixList;
-use crate::prefixes::PrefixList;
+pub mod morphemes;
+
+use crate::morphemes::{prefixes, suffixes};
+use crate::morphemes::prefixes::PrefixList;
+use crate::morphemes::suffixes::SuffixList;
 use crate::words::{beginnings, building, endings_additional, endings_freq};
 
 #[cfg(test)]

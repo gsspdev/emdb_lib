@@ -1,5 +1,5 @@
 pub fn test_module_file() {
-    println!("suffixes.rs connected");
+    println!("morphemes/suffixes.rs connected");
 }
 
 pub struct SuffixList {
