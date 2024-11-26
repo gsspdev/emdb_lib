@@ -1,11 +1,11 @@
-mod phrasing;
-mod punctuation;
-mod phonetics;
-mod phoneme_clusters;
-mod word_building;
-mod word_beginnings;
-mod word_endings_additional;
-mod word_endings_freq;
+pub mod phrasing;
+pub mod punctuation;
+pub mod phonetics;
+pub mod phoneme_clusters;
+pub mod word_building;
+pub mod word_beginnings;
+pub mod word_endings_additional;
+pub mod word_endings_freq;
 
 #[cfg(test)]
 mod tests {
