@@ -14,7 +14,8 @@ exclude = [
     "108-Principles-Emma-Dearborn.md",
     ".cargo_vcs_info.json",
     ".gitignore",
-    "Cargo.toml.orig"
+    "Cargo.toml.orig",
+    "benches/emdb_benchmark.rs"
 ]
 
 [dependencies]
