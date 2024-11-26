@@ -9,7 +9,7 @@ version = "0.1.0"
 edition = "2021"
 exclude = [
     ".idea/*",
-    "input.txt".
+    "input.txt",
     "output.txt",
     "target/*"
 ]
