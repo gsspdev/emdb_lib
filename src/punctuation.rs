@@ -6,7 +6,7 @@ pub fn test_module_file() {
 
 pub fn substitute_punctuation(content: &str) -> String {
     // Define the regex pattern to match punctuation at the end of paragraphs
-    let mut content = content;
+    let content = content;
     let re = Regex::new(r"([.!?])\s*(\n\s*\n|\n*\z)").unwrap();
 
     // Substitution to double the punctuation marks
