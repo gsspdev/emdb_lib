@@ -19,4 +19,5 @@ exclude = [
 
 [dependencies]
 clap = { version = "4.5.21", features = ["derive"] }
+regex = "1.11.1"
 unicode-segmentation = "1.12.0"
