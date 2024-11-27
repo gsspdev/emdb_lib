@@ -1,41 +1,42 @@
-// use regex::Regex;
-
 pub fn test_module_file() {
     println!("words/beginnings.rs connected");
 }
 
 pub fn init_un_to_u(word: &str) -> String {
-    let mut output = String::new();
-    // 20400 words
-    if word.starts_with("un") {
-        output = word.replacen("un", "u", 1);
+    match word {
+        w if w.starts_with("un") => word.replacen("un", "u", 1),
+        _ => word.to_string(),
     }
-    output
 }
 
 pub fn init_en_in_to_n(word: &str) -> String {
-    let mut output = String::new();
-    // 9040 words
-    if word.starts_with("in") {
-        output = word.replacen("in", "n", 1);
-    // 3327 words
-    } else if word.starts_with("en") {
-        output = word.replacen("en", "n", 1);
+    match word {
+        w if w.starts_with("en") => word.replacen("en", "n", 1),
+        w if w.starts_with("in") => word.replacen("in", "n", 1),
+        _ => word.to_string(),
     }
-    output
 }
 
 pub fn init_im_to_i(word: &str) -> String {
-    let mut output = String::new();
-    let third_letter = &word[2..3];
-    // 1875 words
-    if word.starts_with("im") {
-        output = word.replacen("im", "i", 1);
-        if *third_letter == *"a" || *third_letter == *"i" { // ima - 87 words -- imi - 47 words
-            output = format!("{}{}", &output[0..1], &output[2..]);
-        }
+    match word {
+        w if w.starts_with("im") &&
+            w.chars().nth(2).map_or(false, |c| c == 'a' || c == 'i') => {
+            let without_im = w.replacen("im", "i", 1);
+            format!("{}{}", &without_im[0..1], &without_im[2..])
+        },
+        w if w.starts_with("im") => {
+            w.replacen("im", "i", 1)
+        },
+        _ => word.to_string(),
     }
-    output
+}
+
+pub fn em_um_to_m(word: &str) -> String {
+    match word {
+        w if !w.ends_with("em") && w.contains("em") => w.replace("em", "m"),
+        w if !w.ends_with("um") && w.contains("um") => w.replace("um", "m"),
+        _ => word.to_string(),
+    }
 }
 
 #[cfg(test)]
@@ -44,25 +45,37 @@ mod tests {
     
     #[test]
     fn test_init_un_to_u() {
+        assert_eq!(init_un_to_u("tester"), "tester");
         assert_eq!(init_un_to_u("unwise"), "uwise".to_string());
     }
 
     #[test]
     fn test_init_en_in_to_n() {
-        assert_eq!(init_en_in_to_n("enlarge"), "nlarge".to_string());
-        assert_eq!(init_en_in_to_n("endow"), "ndow".to_string());
-        assert_eq!(init_en_in_to_n("inform"), "nform".to_string());
-        assert_eq!(init_en_in_to_n("insist"), "nsist".to_string());
+        assert_eq!(init_en_in_to_n("unmodified"), "unmodified");
+        assert_eq!(init_en_in_to_n("enlarge"), "nlarge");
+        assert_eq!(init_en_in_to_n("endow"), "ndow");
+        assert_eq!(init_en_in_to_n("inform"), "nform");
+        assert_eq!(init_en_in_to_n("insist"), "nsist");
     }
     
     #[test]
     fn test_init_im_to_n() {
-        assert_eq!(init_im_to_i("image"), "ige".to_string());
-        assert_eq!(init_im_to_i("imitate"), "itate".to_string());
-        assert_eq!(init_im_to_i("imply"), "iply".to_string());
+        assert_eq!(init_en_in_to_n("unmodified"), "unmodified");
+        assert_eq!(init_im_to_i("image"), "ige");
+        assert_eq!(init_im_to_i("imitate"), "itate");
+        assert_eq!(init_im_to_i("imply"), "iply");
 //        assert_eq!(init_im_to_in("unimpaired"), "unpaired".to_string());
 //        assert_eq!(init_im_to_in("unimproved"), "unproved".to_string());
     }
+
+    #[test]
+    fn test_em_um_to_m() {
+        assert_eq!(em_um_to_m("unmodified"), "unmodified");
+        assert_eq!(em_um_to_m("emphasize"), "mphasize");
+        assert_eq!(em_um_to_m("empty"), "mpty");
+        assert_eq!(em_um_to_m("umpire"), "mpire");
+        assert_eq!(em_um_to_m("umbilical"), "mbilical");
+}
 
 }
 
@@ -98,10 +111,10 @@ mod tests {
 //(89) Write m to express initial and medial em or um
 //
 //```
-//mfsz = emphasize
-//mt, = empty
-//mpi = umpire
-//mbK = umbilical
+//mfsz = emphasize // works
+//mt, = empty // works
+//mpi = umpire // works
+//mbK = umbilical // works
 //```
 //
 //(42) Write a to express initial ar-, e for er-, o for or-, u for ur-. Apparently this Principle only applies to words in which the vowel and the r are members of the same syllable. For exmaple, you cannot use this Principle to write “arise” or “erase.”
