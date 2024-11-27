@@ -13,6 +13,10 @@ impl PrefixList {
         }
     }
 
+    pub fn return_prefixes(&self) -> &'static [&'static str] {
+       return self.prefixes
+    }
+
     pub fn print_prefix_entries(&self) {
         println!("///////////////////////");
         println!("Printing prefixes:");
@@ -37,3 +41,16 @@ static LIST_OF_PREFIXES: &[&str] = &[
     "retro", "semi", "socio", "sub", "super", "supra", "sur", "syn", "tele", "trans", "tri",
     "ultra", "uni", "vice", "gain", "umbe", "y",
 ];
+
+#[cfg(test)]
+
+#[test]
+pub fn returns_prefixes() {
+    let pl = PrefixList::new();
+    let prefixes_from_return_prefixes = pl.return_prefixes();
+    assert_eq!(prefixes_from_return_prefixes, LIST_OF_PREFIXES);
+    
+//    println!("prefixes_from_return_prefixes: {:?}", prefixes_from_return_prefixes);
+//    println!("IS EQUAL TO:");
+//    println!("LIST_OF_PREFIXES: {:?}", LIST_OF_PREFIXES);
+}
