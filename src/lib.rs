@@ -6,14 +6,13 @@ pub mod words;
 pub mod types;
 pub mod morphemes;
 
-use crate::morphemes::{prefixes, suffixes};
-use crate::morphemes::prefixes::PrefixList;
-use crate::morphemes::suffixes::SuffixList;
-use crate::words::{beginnings, building, endings_additional, endings_freq};
-
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::morphemes::{prefixes, suffixes};
+    use crate::morphemes::prefixes::PrefixList;
+    use crate::morphemes::suffixes::SuffixList;
+    use crate::words::{beginnings, building, endings_additional, endings_freq};
 
     #[test]
     fn test_modules_connected() {

@@ -1,14 +1,4 @@
-pub fn test_module_file() {
-    println!("words/beginnings.rs connected");
-}
-
-pub fn init_un_to_u(word: &str) -> String {
-    match word {
-        w if w.starts_with("un") => word.replacen("un", "u", 1),
-        _ => word.to_string(),
-    }
-}
-
+// (40) Write the letter n to express initial en-, in-
 pub fn init_en_in_to_n(word: &str) -> String {
     match word {
         w if w.starts_with("en") => word.replacen("en", "n", 1),
@@ -17,20 +7,52 @@ pub fn init_en_in_to_n(word: &str) -> String {
     }
 }
 
-pub fn init_im_to_i(word: &str) -> String {
+#[test]
+fn test_init_en_in_to_n() {
+    assert_eq!(init_en_in_to_n("unmodified"), "unmodified");
+    assert_eq!(init_en_in_to_n("enlarge"), "nlarge");
+    assert_eq!(init_en_in_to_n("endow"), "ndow");
+    assert_eq!(init_en_in_to_n("inform"), "nform");
+    assert_eq!(init_en_in_to_n("insist"), "nsist");
+}
+
+// (46) Write the letter u to express “un” at the beginning of a word.
+pub fn init_un_to_u(word: &str) -> String {
     match word {
-        w if w.starts_with("im") &&
-            w.chars().nth(2).map_or(false, |c| c == 'a' || c == 'i') => {
-            let without_im = w.replacen("im", "i", 1);
-            format!("{}{}", &without_im[0..1], &without_im[2..])
-        },
-        w if w.starts_with("im") => {
-            w.replacen("im", "i", 1)
-        },
+        w if w.starts_with("un") => word.replacen("un", "u", 1),
         _ => word.to_string(),
     }
 }
 
+#[test]
+fn test_init_un_to_u() {
+    assert_eq!(init_un_to_u("tester"), "tester");
+    assert_eq!(init_un_to_u("unwise"), "uwise".to_string());
+}
+
+// (75) Write i to express initial im-. This Principle can also be used when there are prefixes added to word that started out with im-, but this Principle does not apply to words like “crimson” or “simmer” that just happen to contatin the sequence I+M.
+pub fn init_im_to_i(word: &str) -> String {
+    match word {
+        w if w.starts_with("im") && w.chars().nth(2).map_or(false, |c| c == 'a' || c == 'i') => {
+            let without_im = w.replacen("im", "i", 1);
+            format!("{}{}", &without_im[0..1], &without_im[2..])
+        }
+        w if w.starts_with("im") => w.replacen("im", "i", 1),
+        _ => word.to_string(),
+    }
+}
+
+#[test]
+fn test_init_im_to_i() {
+    assert_eq!(init_im_to_i("unmodified"), "unmodified");
+    assert_eq!(init_im_to_i("image"), "ige");
+    assert_eq!(init_im_to_i("imitate"), "itate");
+    assert_eq!(init_im_to_i("imply"), "iply");
+    //        assert_eq!(init_im_to_in("unimpaired"), "unpaired".to_string());
+    //        assert_eq!(init_im_to_in("unimproved"), "unproved".to_string());
+}
+
+// (89) Write m to express initial and medial em or um
 pub fn em_um_to_m(word: &str) -> String {
     match word {
         w if !w.ends_with("em") && w.contains("em") => w.replace("em", "m"),
@@ -39,143 +61,163 @@ pub fn em_um_to_m(word: &str) -> String {
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    
-    #[test]
-    fn test_init_un_to_u() {
-        assert_eq!(init_un_to_u("tester"), "tester");
-        assert_eq!(init_un_to_u("unwise"), "uwise".to_string());
-    }
-
-    #[test]
-    fn test_init_en_in_to_n() {
-        assert_eq!(init_en_in_to_n("unmodified"), "unmodified");
-        assert_eq!(init_en_in_to_n("enlarge"), "nlarge");
-        assert_eq!(init_en_in_to_n("endow"), "ndow");
-        assert_eq!(init_en_in_to_n("inform"), "nform");
-        assert_eq!(init_en_in_to_n("insist"), "nsist");
-    }
-    
-    #[test]
-    fn test_init_im_to_n() {
-        assert_eq!(init_en_in_to_n("unmodified"), "unmodified");
-        assert_eq!(init_im_to_i("image"), "ige");
-        assert_eq!(init_im_to_i("imitate"), "itate");
-        assert_eq!(init_im_to_i("imply"), "iply");
-//        assert_eq!(init_im_to_in("unimpaired"), "unpaired".to_string());
-//        assert_eq!(init_im_to_in("unimproved"), "unproved".to_string());
-    }
-
-    #[test]
-    fn test_em_um_to_m() {
-        assert_eq!(em_um_to_m("unmodified"), "unmodified");
-        assert_eq!(em_um_to_m("emphasize"), "mphasize");
-        assert_eq!(em_um_to_m("empty"), "mpty");
-        assert_eq!(em_um_to_m("umpire"), "mpire");
-        assert_eq!(em_um_to_m("umbilical"), "mbilical");
+#[test]
+fn test_em_um_to_m() {
+    assert_eq!(em_um_to_m("unmodified"), "unmodified");
+    assert_eq!(em_um_to_m("emphasize"), "mphasize");
+    assert_eq!(em_um_to_m("empty"), "mpty");
+    assert_eq!(em_um_to_m("umpire"), "mpire");
+    assert_eq!(em_um_to_m("umbilical"), "mbilical");
 }
 
+// (42) Write a to express initial ar-, e for er-, o for or-, u for ur-. Apparently this Principle only applies to words in which the vowel and the r are members of the same syllable. For exmaple, you cannot use this Principle to write “arise” or “erase.”
+pub fn init_vowel_r_to_r(word: &str) -> String {
+    //let mut word = word.clone();
+    match word {
+        w if w.starts_with("ar") => w.replacen("ar", "a", 1),
+        w if w.starts_with("er") => w.replacen("er", "e", 1),
+        w if w.starts_with("ir") => w.replacen("ir", "i", 1),
+        w if w.starts_with("or") => w.replacen("or", "o", 1),
+        w if w.starts_with("ur") => w.replacen("ur", "u", 1),
+        w if w.starts_with("ear") => w.replacen("ear", "e", 1),
+        _ => word.to_string(),
+    }
 }
 
-//## Word-beginnings
-//
-//Vowels Followed by n, m, r
-//
-//(40) Write the letter n to express initial en-, in- [Implemented]
-//
-//```
-//nlj = enlarge // works
-//ndw = endow // works
-//nfm = inform //works
-//ns, = insist //works
-//```
-//
-//(46) Write the letter u to express “un” at the beginning of a word. [Implemented]
-//
-//```
-//uwz = unwise // works
-//ukdj = unconditional // works
-//```
-//
-//(75) Write i to express initial im-. This Principle can also be used when there are prefixes added to word that started out with im-, but this Principle does not apply to words like “crimson” or “simmer” that just happen to contatin the sequence I+M. [Partially Implemented]
-//
-//```
-//ij = image // works
-//ita = imitate // works
-//uipa = unimpaired //unimplemented
-//uipv = unimproved //unimplemented
-//```
-//
-//(89) Write m to express initial and medial em or um
-//
-//```
-//mfsz = emphasize // works
-//mt, = empty // works
-//mpi = umpire // works
-//mbK = umbilical // works
-//```
-//
-//(42) Write a to express initial ar-, e for er-, o for or-, u for ur-. Apparently this Principle only applies to words in which the vowel and the r are members of the same syllable. For exmaple, you cannot use this Principle to write “arise” or “erase.”
-//
-//```
-//ac = arch
-//eth = earth
-//ojn = origin
-//ubn = urban
-//```
-//
-//Vowels Dropped from Selected Prefixes
-//
+#[test]
+fn test_init_vowel_r_to_r() {
+    assert_eq!(init_vowel_r_to_r("arch"), "ach");
+    assert_eq!(init_vowel_r_to_r("earth"), "eth");
+    assert_eq!(init_vowel_r_to_r("origin"), "oigin");
+    assert_eq!(init_vowel_r_to_r("urban"), "uban");
+}
+
 //(56) Omit the vowels in be-, de-, di-, dis-, mis-, re-. Although it is not mentioned in the textbook, the dictionary indicates that the vowel is also omitted in bi-.
-//
-//```
-//bsi = beside           blad = belated
-//bpd = biped            bsK = bicycle
-//dtk = detect           dtc- = detachment
-//drk = direct           drnl = diurnal
-//dspl = dispel          dsnfk = disinfect
-//msjj = misjudge        msUs- = misunderstand
-//rmv = remove           rdkj = reduction
-//```
-//
-//Word-beginnings with -nkl- and -kl- Sounds
-//
+pub fn omit_init_vowel(word: &str) -> String {
+    match word {
+        w if w.starts_with("be") => w.replacen("be", "b", 1),
+        w if w.starts_with("de") => w.replacen("de", "d", 1),
+        w if w.starts_with("dis") => w.replacen("dis", "ds", 1),
+        w if w.starts_with("di") => w.replacen("di", "d", 1),
+        w if w.starts_with("mis") => w.replacen("mis", "ms", 1),
+        w if w.starts_with("re") => w.replacen("re", "r", 1),
+        w if w.starts_with("bi") => w.replacen("bi", "b", 1),
+        _ => word.to_string(),
+    }
+}
+
+#[test]
+fn test_omit_init_vowel() {
+    assert_eq!(omit_init_vowel("beside"), "bside");
+    assert_eq!(omit_init_vowel("biped"), "bped");
+    assert_eq!(omit_init_vowel("detect"), "dtect");
+    assert_eq!(omit_init_vowel("direct"), "drect");
+    assert_eq!(omit_init_vowel("dispel"), "dspel");
+    assert_eq!(omit_init_vowel("misjudge"), "msjudge");
+    assert_eq!(omit_init_vowel("remove"), "rmove");
+    assert_eq!(omit_init_vowel("belated"), "blated");
+    assert_eq!(omit_init_vowel("bicycle"), "bcycle");
+    assert_eq!(omit_init_vowel("detachment"), "dtachment");
+    assert_eq!(omit_init_vowel("diurnal"), "durnal");
+    assert_eq!(omit_init_vowel("disinfect"), "dsinfect");
+    assert_eq!(omit_init_vowel("misunderstand"), "msunderstand");
+    assert_eq!(omit_init_vowel("reduction"), "rduction");
+}
+
 //(69) Write nc to express the word-beginnings encli-, enclo-, incle-, incli-, inclo-, inclu-.
-//
-//```
-//ncT = enclitic         ncnj = inclination
-//ncz/ = enclosure       nc = inclose
-//nc- = inclement        ncd = include
-//```
-//
+pub fn nc_shortcut(word: &str) -> String {
+    let mut return_string: String;
+    match word {
+        w if w.starts_with("encli") => return_string = format!("nc{}", &word[5..]).to_string(),
+        w if w.starts_with("enclo") => return_string = format!("nc{}", &word[5..]).to_string(),
+        w if w.starts_with("incle") => return_string = format!("nc{}", &word[5..]).to_string(),
+        w if w.starts_with("incli") => return_string = format!("nc{}", &word[5..]).to_string(),
+        w if w.starts_with("inclo") => return_string = format!("nc{}", &word[5..]).to_string(),
+        w if w.starts_with("inclu") => return_string = format!("nc{}", &word[5..]).to_string(),
+        _ => return word.to_string(),
+    }
+    return_string.to_string()
+}
+
+#[test]
+fn test_nc_shortcut() {
+    assert_eq!(nc_shortcut("enclitic"), "nctic");
+    assert_eq!(nc_shortcut("enclosure"), "ncsure");
+    assert_eq!(nc_shortcut("inclement"), "ncment");
+    assert_eq!(nc_shortcut("inclination"), "ncnation");
+    assert_eq!(nc_shortcut("inclose"), "ncse");
+    assert_eq!(nc_shortcut("include"), "ncde");
+}
+
 //(70) Write dc to express the word-beginnings decla-, decle-, decli-.
-//
-//```
-//dcv = declarative
-//dcj = declension
-//dcn = decline
-//```
-//
+pub fn dc_shortcut(word: &str) -> String {
+    let mut return_string: String;
+    match word {
+        w if w.starts_with("decla") => return_string = format!("dc{}", &word[5..]).to_string(),
+        w if w.starts_with("decle") => return_string = format!("dc{}", &word[5..]).to_string(),
+        w if w.starts_with("decli") => return_string = format!("dc{}", &word[5..]).to_string(),
+        w if w.starts_with("decor") => return_string = format!("dc{}", &word[5..]).to_string(),
+        _ => return word.to_string(),
+    }
+    return_string.to_string()
+}
+
+#[test]
+fn test_dc_shortcut() {
+    assert_eq!(dc_shortcut("decorative"), "dcative");
+    assert_eq!(dc_shortcut("declension"), "dcnsion");
+    assert_eq!(dc_shortcut("decline"), "dcne");
+}
+
 //(71) Write rc to express the word-beginnings recla-, recli-, reclu-.
-//
-//```
-//rcm = reclaim
-//rcn = recline
-//rcsv = reclusive
-//```
-//
-//Word-beginnings with -tr- and -dr- Sounds
-//
+pub fn rc_shortcut(word: &str) -> String {
+    let mut return_string: String;
+    match word {
+        w if w.starts_with("recla") => return_string = format!("rc{}", &word[5..]).to_string(),
+        w if w.starts_with("recli") => return_string = format!("rc{}", &word[5..]).to_string(),
+        w if w.starts_with("reclu") => return_string = format!("rc{}", &word[5..]).to_string(),
+        _ => return word.to_string(),
+    }
+    return_string.to_string()
+}
+
+#[test]
+fn test_rc_shortcut() {
+    assert_eq!(rc_shortcut("reclaim"), "rcim");
+    assert_eq!(rc_shortcut("recline"), "rcne");
+    assert_eq!(rc_shortcut("reclusive"), "rcsive");
+}
+
 //(63) Use upper-case D to express deter- or detri-
-//
-//```
-//Dm = determine
-//D-l = detrimental
-//```
-//
+pub fn detxx_to_D(word: &str) -> String {
+    let mut return_string: String;
+    match word {
+        w if w.starts_with("deter") => return_string = format!("D{}", &word[5..]).to_string(),
+        w if w.starts_with("detri") => return_string = format!("D{}", &word[5..]).to_string(),
+        _ => return word.to_string(),
+    }
+    return_string.to_string()
+}
+
+#[test]
+pub fn test_detxx_to_D() {
+    assert_eq!(detxx_to_D("determine"), "Dmine");
+    assert_eq!(detxx_to_D("detrimental"), "Dmental");
+}
+
 //(64) Write Al to express initial or medial alter-
+pub fn alter_to_Al(word: &str) -> String {
+    match word {
+        w if !w.ends_with("alter") && w.contains("alter") => w.replace("alter", "Al"),
+        _ => word.to_string(),
+    }
+}
+
+#[test]
+pub fn test_alter_to_al() {
+    assert_eq!(alter_to_Al("alternative"), "Alnative");
+    assert_eq!(alter_to_Al("alteration"), "Alation");
+}
 //
 //```
 //Alnv = alternative
@@ -391,4 +433,80 @@ mod tests {
 //
 //(105) Write Ml to express the word-beginning multi-.
 //
+
 //Mltu = multitude       Mlp = multiple
+
+//## Word-beginnings
+//
+//Vowels Followed by n, m, r
+//
+//(40) Write the letter n to express initial en-, in- [Implemented]
+//
+//```d
+//nlj = enlarge // works
+//ndw = endow // works
+//nfm = inform //works
+//ns, = insist //works
+//```
+//
+//(46) Write the letter u to express “un” at the beginning of a word. [Implemented]
+//
+//```
+//uwz = unwise // works
+//ukdj = unconditional // works
+//```
+//
+//(75) Write i to express initial im-. This Principle can also be used when there are prefixes added to word that started out with im-, but this Principle does not apply to words like “crimson” or “simmer” that just happen to contatin the sequence I+M. [Partially Implemented]
+//
+//```
+//ij = image // works
+//ita = imitate // works
+//uipa = unimpaired //unimplemented
+//uipv = unimproved //unimplemented
+//```
+//
+//(89) Write m to express initial and medial em or um
+//
+//```
+//mfsz = emphasize // works
+//mt, = empty // works
+//mpi = umpire // works
+//mbK = umbilical // works
+//```
+//
+//(42) Write a to express initial ar-, e for er-, o for or-, u for ur-. Apparently this Principle only applies to words in which the vowel and the r are members of the same syllable. For exmaple, you cannot use this Principle to write “arise” or “erase.”
+//
+//```
+//ac = arch // works
+//eth = earth // works
+//ojn = origin //wo
+//ubn = urban // works
+//```
+//
+//Vowels Dropped from Selected Prefixes
+//
+//(56) Omit the vowels in be-, de-, di-, dis-, mis-, re-. Although it is not mentioned in the textbook, the dictionary indicates that the vowel is also omitted in bi-.
+//
+//```
+//bsi = beside // works          blad = belated // works
+//bpd = biped // works           bsK = bicycle // works
+//dtk = detect // works          dtc- = detachment // works
+//drk = direct // works          drnl = diurnal // works
+//dspl = dispel // works         dsnfk = disinfect // works
+//msjj = misjudge // works       msUs- = misunderstand // works
+//rmv = remove // works          rdkj = reduction // works
+//```
+//
+//Word-beginnings with -nkl- and -kl- Sounds
+//
+//(69) Write nc to express the word-beginnings encli-, enclo-, incle-, incli-, inclo-, inclu-.
+//
+//```
+//ncT = enclitic // works         ncnj = inclination // works
+//ncz/ = enclosure // works       nc = inclose // works
+//nc- = inclement // works        ncd = include // works
+//```
+
+pub fn test_module_file() {
+    println!("words/beginnings.rs connected");
+}
