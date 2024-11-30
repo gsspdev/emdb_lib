@@ -126,7 +126,7 @@ fn test_omit_init_vowel() {
 
 //(69) Write nc to express the word-beginnings encli-, enclo-, incle-, incli-, inclo-, inclu-.
 pub fn nc_shortcut(word: &str) -> String {
-    let mut return_string: String;
+    let return_string: String;
     match word {
         w if w.starts_with("encli") => return_string = format!("nc{}", &word[5..]).to_string(),
         w if w.starts_with("enclo") => return_string = format!("nc{}", &word[5..]).to_string(),
@@ -151,7 +151,7 @@ fn test_nc_shortcut() {
 
 //(70) Write dc to express the word-beginnings decla-, decle-, decli-.
 pub fn dc_shortcut(word: &str) -> String {
-    let mut return_string: String;
+    let return_string: String;
     match word {
         w if w.starts_with("decla") => return_string = format!("dc{}", &word[5..]).to_string(),
         w if w.starts_with("decle") => return_string = format!("dc{}", &word[5..]).to_string(),
@@ -171,7 +171,7 @@ fn test_dc_shortcut() {
 
 //(71) Write rc to express the word-beginnings recla-, recli-, reclu-.
 pub fn rc_shortcut(word: &str) -> String {
-    let mut return_string: String;
+    let return_string: String;
     match word {
         w if w.starts_with("recla") => return_string = format!("rc{}", &word[5..]).to_string(),
         w if w.starts_with("recli") => return_string = format!("rc{}", &word[5..]).to_string(),
@@ -189,8 +189,8 @@ fn test_rc_shortcut() {
 }
 
 //(63) Use upper-case D to express deter- or detri-
-pub fn detxx_to_D(word: &str) -> String {
-    let mut return_string: String;
+pub fn detXX_to_D(word: &str) -> String {
+    let return_string: String;
     match word {
         w if w.starts_with("deter") => return_string = format!("D{}", &word[5..]).to_string(),
         w if w.starts_with("detri") => return_string = format!("D{}", &word[5..]).to_string(),
@@ -200,9 +200,9 @@ pub fn detxx_to_D(word: &str) -> String {
 }
 
 #[test]
-pub fn test_detxx_to_D() {
-    assert_eq!(detxx_to_D("determine"), "Dmine");
-    assert_eq!(detxx_to_D("detrimental"), "Dmental");
+pub fn test_detXX_to_D() {
+    assert_eq!(detXX_to_D("determine"), "Dmine");
+    assert_eq!(detXX_to_D("detrimental"), "Dmental");
 }
 
 //(64) Write Al to express initial or medial alter-
@@ -214,49 +214,131 @@ pub fn alter_to_Al(word: &str) -> String {
 }
 
 #[test]
-pub fn test_alter_to_al() {
+pub fn test_alter_to_Al() {
     assert_eq!(alter_to_Al("alternative"), "Alnative");
     assert_eq!(alter_to_Al("alteration"), "Alation");
 }
-//
-//```
-//Alnv = alternative
-//Alj = alteration
-//```
-//
+
 //(66) Pa represents initial pater-, patri-, patro-
-//
-//```
-//Pan; = paternity
-//Pat = patriot
-//Pan = patron
-//```
-//
+pub fn patXX_to_Pa(word: &str) -> String {
+    match word {
+        w if w.starts_with("pater") => return format!("Pa{}", &word[5..]).to_string(),
+        w if w.starts_with("patri") => return format!("Pa{}", &word[5..]).to_string(),
+        w if w.starts_with("patro") => return format!("Pa{}", &word[5..]).to_string(),
+        _ => return word.to_string(),
+    }
+}
+
+#[test]
+pub fn test_patXX_to_Pa() {
+    assert_eq!(patXX_to_Pa("paternity"), "Panity");
+    assert_eq!(patXX_to_Pa("patriot"), "Paot");
+    assert_eq!(patXX_to_Pa("patrony"), "Pany");
+    assert_eq!(patXX_to_Pa("unchanged"), "unchanged")
+}
+
 //(85) Write upper-case T to express the prefix trans-
-//
-//```
-//Tf = transfer
-//Tmub = transmutable
-//```
-//
+pub fn trans_to_T(word: &str) -> String {
+    match word {
+        w if w.starts_with("trans") => w.replace("trans", "T"),
+        _ => word.to_string(),
+    }
+}
+
+#[test]
+pub fn test_trans_to_T() {
+    assert_eq!(trans_to_T("transfer"), "Tfer");
+    assert_eq!(trans_to_T("transmutable"), "Tmutable");
+    assert_eq!(trans_to_T("unchanged"), "unchanged")
+}
+
 //(88) Write upper-case X to express the word-beginnings exter-, extir-, extra-, extre-, extri-, extru-.
-//
-//```
-//Xnl = external
-//Xk = extract
-//Xm = extreme
-//Xka = extricate
-//Xd = extrude
-//```
-//
+pub fn extXX_to_X(word: &str) -> String {
+    let return_string: String;
+    match word {
+        w if w.starts_with("exter") => return_string = format!("X{}", &word[5..]).to_string(),
+        w if w.starts_with("extir") => return_string = format!("X{}", &word[5..]).to_string(),
+        w if w.starts_with("extra") => return_string = format!("X{}", &word[5..]).to_string(),
+        w if w.starts_with("extre") => return_string = format!("X{}", &word[5..]).to_string(),
+        w if w.starts_with("extri") => return_string = format!("X{}", &word[5..]).to_string(),
+        w if w.starts_with("extru") => return_string = format!("X{}", &word[5..]).to_string(),
+        _ => return word.to_string(),
+    }
+    return_string.to_string()
+}
+
+#[test]
+pub fn test_extXX_to_X() {
+    assert_eq!(extXX_to_X("external"), "Xnal");
+    assert_eq!(extXX_to_X("extract"), "Xct");
+    assert_eq!(extXX_to_X("extreme"), "Xme");
+    assert_eq!(extXX_to_X("extricate"), "Xcate");
+    assert_eq!(extXX_to_X("extrude"), "Xde");
+    assert_eq!(retXX_to_R("unchanged"), "unchanged");
+}
+
 //(96) Write upper-case R to express the word-beginnings retre-, retri-, retro-
-//
-//```
-//Rt = retreat
-//Rbj = retribution
-//Rspkv = retrospective
-//```
-//
+pub fn retXX_to_R(word: &str) -> String {
+    let return_string: String;
+    match word {
+        w if w.starts_with("retre") => return_string = format!("R{}", &word[5..]).to_string(),
+        w if w.starts_with("retri") => return_string = format!("R{}", &word[5..]).to_string(),
+        w if w.starts_with("retro") => return_string = format!("R{}", &word[5..]).to_string(),
+        _ => return word.to_string(),
+    }
+    return_string.to_string()
+}
+
+#[test]
+pub fn test_retXX_to_R() {
+    assert_eq!(retXX_to_R("retreat"), "Rat");
+    assert_eq!(retXX_to_R("retribution"), "Rbution");
+    assert_eq!(retXX_to_R("retrospective"), "Rspective");
+    assert_eq!(retXX_to_R("unchanged"), "unchanged");
+}
+
+// pub fn XXXXX_to_X(word: &str) -> String {
+//     let mut return_string: String;
+//     match word {
+//         w if w.starts_with("") => return_string = format!("{}", &word[NUMBER..]).to_string(),
+//         w if w.starts_with("") => return_string = format!("{}", &word[NUMBER..]).to_string(),
+//         w if w.starts_with("") => return_string = format!("{}", &word[NUMBER..]).to_string(),
+//         _ => return word.to_string(),
+//     }
+//     return_string.to_string()
+// }
+
+macro_rules! create_transform_function {
+    ($func_name:ident, $( $prefix:expr => $substitution:expr, $number:expr),*) => {
+        pub fn $func_name(word: &str) -> String {
+            let return_string = match word {
+                $(
+                    w if w.starts_with($prefix) => format!("($substitution){}", &word[$number..]),
+                )*
+                _ => word.to_string(),
+            };
+            return_string
+        }
+    };
+}
+
+create_transform_function!("testy", "works", 5);
+
+#[cfg(test)]
+assert_eq!(testy("testycase"), "workscase");
+
+// macro_rules! say_hello {
+//     () => {
+//         println!("Hello, world!");
+//     };
+// }
+
+// macro_rules! calculate {
+//     ($x:expr, $y:expr) => {
+//         $x + $y
+//     };
+// }
+
 //(102) Write upper-case A to express the word-beginnings attra-, attri-, atro-
 //
 //```
