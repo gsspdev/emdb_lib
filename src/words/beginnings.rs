@@ -189,7 +189,7 @@ fn test_rc_shortcut() {
 }
 
 //(63) Use upper-case D to express deter- or detri-
-pub fn detXX_to_D(word: &str) -> String {
+pub fn detxx_to_upper_d(word: &str) -> String {
     let return_string: String;
     match word {
         w if w.starts_with("deter") => return_string = format!("D{}", &word[5..]).to_string(),
@@ -200,13 +200,13 @@ pub fn detXX_to_D(word: &str) -> String {
 }
 
 #[test]
-pub fn test_detXX_to_D() {
-    assert_eq!(detXX_to_D("determine"), "Dmine");
-    assert_eq!(detXX_to_D("detrimental"), "Dmental");
+pub fn test_detxx_to_upper_d() {
+    assert_eq!(detxx_to_upper_d("determine"), "Dmine");
+    assert_eq!(detxx_to_upper_d("detrimental"), "Dmental");
 }
 
 //(64) Write Al to express initial or medial alter-
-pub fn alter_to_Al(word: &str) -> String {
+pub fn alter_to_upper_al(word: &str) -> String {
     match word {
         w if !w.ends_with("alter") && w.contains("alter") => w.replace("alter", "Al"),
         _ => word.to_string(),
@@ -214,13 +214,13 @@ pub fn alter_to_Al(word: &str) -> String {
 }
 
 #[test]
-pub fn test_alter_to_Al() {
-    assert_eq!(alter_to_Al("alternative"), "Alnative");
-    assert_eq!(alter_to_Al("alteration"), "Alation");
+pub fn test_alter_to_al() {
+    assert_eq!(alter_to_upper_al("alternative"), "Alnative");
+    assert_eq!(alter_to_upper_al("alteration"), "Alation");
 }
 
 //(66) Pa represents initial pater-, patri-, patro-
-pub fn patXX_to_Pa(word: &str) -> String {
+pub fn patxx_to_upper_pa(word: &str) -> String {
     match word {
         w if w.starts_with("pater") => return format!("Pa{}", &word[5..]).to_string(),
         w if w.starts_with("patri") => return format!("Pa{}", &word[5..]).to_string(),
@@ -230,15 +230,15 @@ pub fn patXX_to_Pa(word: &str) -> String {
 }
 
 #[test]
-pub fn test_patXX_to_Pa() {
-    assert_eq!(patXX_to_Pa("paternity"), "Panity");
-    assert_eq!(patXX_to_Pa("patriot"), "Paot");
-    assert_eq!(patXX_to_Pa("patrony"), "Pany");
-    assert_eq!(patXX_to_Pa("unchanged"), "unchanged")
+pub fn test_patxx_to_upper_pa() {
+    assert_eq!(patxx_to_upper_pa("paternity"), "Panity");
+    assert_eq!(patxx_to_upper_pa("patriot"), "Paot");
+    assert_eq!(patxx_to_upper_pa("patrony"), "Pany");
+    assert_eq!(patxx_to_upper_pa("unchanged"), "unchanged")
 }
 
 //(85) Write upper-case T to express the prefix trans-
-pub fn trans_to_T(word: &str) -> String {
+pub fn trans_to_upper_t(word: &str) -> String {
     match word {
         w if w.starts_with("trans") => w.replace("trans", "T"),
         _ => word.to_string(),
@@ -246,14 +246,14 @@ pub fn trans_to_T(word: &str) -> String {
 }
 
 #[test]
-pub fn test_trans_to_T() {
-    assert_eq!(trans_to_T("transfer"), "Tfer");
-    assert_eq!(trans_to_T("transmutable"), "Tmutable");
-    assert_eq!(trans_to_T("unchanged"), "unchanged")
+pub fn test_trans_to_upper_t() {
+    assert_eq!(trans_to_upper_t("transfer"), "Tfer");
+    assert_eq!(trans_to_upper_t("transmutable"), "Tmutable");
+    assert_eq!(trans_to_upper_t("unchanged"), "unchanged")
 }
 
 //(88) Write upper-case X to express the word-beginnings exter-, extir-, extra-, extre-, extri-, extru-.
-pub fn extXX_to_X(word: &str) -> String {
+pub fn extxx_to_upper_x(word: &str) -> String {
     let return_string: String;
     match word {
         w if w.starts_with("exter") => return_string = format!("X{}", &word[5..]).to_string(),
@@ -268,17 +268,17 @@ pub fn extXX_to_X(word: &str) -> String {
 }
 
 #[test]
-pub fn test_extXX_to_X() {
-    assert_eq!(extXX_to_X("external"), "Xnal");
-    assert_eq!(extXX_to_X("extract"), "Xct");
-    assert_eq!(extXX_to_X("extreme"), "Xme");
-    assert_eq!(extXX_to_X("extricate"), "Xcate");
-    assert_eq!(extXX_to_X("extrude"), "Xde");
-    assert_eq!(retXX_to_R("unchanged"), "unchanged");
+pub fn test_extxx_to_upper_x() {
+    assert_eq!(extxx_to_upper_x("external"), "Xnal");
+    assert_eq!(extxx_to_upper_x("extract"), "Xct");
+    assert_eq!(extxx_to_upper_x("extreme"), "Xme");
+    assert_eq!(extxx_to_upper_x("extricate"), "Xcate");
+    assert_eq!(extxx_to_upper_x("extrude"), "Xde");
+    assert_eq!(extxx_to_upper_x("unchanged"), "unchanged");
 }
 
 //(96) Write upper-case R to express the word-beginnings retre-, retri-, retro-
-pub fn retXX_to_R(word: &str) -> String {
+pub fn retxx_to_upper_r(word: &str) -> String {
     let return_string: String;
     match word {
         w if w.starts_with("retre") => return_string = format!("R{}", &word[5..]).to_string(),
@@ -290,73 +290,96 @@ pub fn retXX_to_R(word: &str) -> String {
 }
 
 #[test]
-pub fn test_retXX_to_R() {
-    assert_eq!(retXX_to_R("retreat"), "Rat");
-    assert_eq!(retXX_to_R("retribution"), "Rbution");
-    assert_eq!(retXX_to_R("retrospective"), "Rspective");
-    assert_eq!(retXX_to_R("unchanged"), "unchanged");
+pub fn test_retxx_to_upper_r() {
+    assert_eq!(retxx_to_upper_r("retreat"), "Rat");
+    assert_eq!(retxx_to_upper_r("retribution"), "Rbution");
+    assert_eq!(retxx_to_upper_r("retrospective"), "Rspective");
+    assert_eq!(retxx_to_upper_r("unchanged"), "unchanged");
 }
-
-// pub fn XXXXX_to_X(word: &str) -> String {
-//     let mut return_string: String;
-//     match word {
-//         w if w.starts_with("") => return_string = format!("{}", &word[NUMBER..]).to_string(),
-//         w if w.starts_with("") => return_string = format!("{}", &word[NUMBER..]).to_string(),
-//         w if w.starts_with("") => return_string = format!("{}", &word[NUMBER..]).to_string(),
-//         _ => return word.to_string(),
-//     }
-//     return_string.to_string()
-// }
-
-macro_rules! create_transform_function {
-    ($func_name:ident, $( $prefix:expr => $substitution:expr, $number:expr),*) => {
-        pub fn $func_name(word: &str) -> String {
-            let return_string = match word {
-                $(
-                    w if w.starts_with($prefix) => format!("($substitution){}", &word[$number..]),
-                )*
-                _ => word.to_string(),
-            };
-            return_string
-        }
-    };
-}
-
-create_transform_function!("testy", "works", 5);
-
-#[cfg(test)]
-assert_eq!(testy("testycase"), "workscase");
-
-// macro_rules! say_hello {
-//     () => {
-//         println!("Hello, world!");
-//     };
-// }
-
-// macro_rules! calculate {
-//     ($x:expr, $y:expr) => {
-//         $x + $y
-//     };
-// }
 
 //(102) Write upper-case A to express the word-beginnings attra-, attri-, atro-
-//
-//```
-//Akv = attractive
-//Abj = attribution
-//As; = atrocity
-//```
-//
+pub fn atxrx_to_upper_a(word: &str) -> String {
+    match word {
+        w if w.starts_with("attra") => format!("A{}", &word[5..]).to_string(),
+        w if w.starts_with("attri") => format!("A{}", &word[5..]).to_string(),
+        w if w.starts_with("atro") => format!("A{}", &word[4..]).to_string(),
+        _ => return word.to_string(),
+    }
+}
+
+#[test]
+pub fn test_atxrx_to_upper_a() {
+    assert_eq!(atxrx_to_upper_a("attractive"), "Active");
+    assert_eq!(atxrx_to_upper_a("attribution"), "Abution");
+    assert_eq!(atxrx_to_upper_a("atrocity"), "Acity");
+    assert_eq!(atxrx_to_upper_a("unchanged"), "unchanged");
+}
+
 //(104) Write upper-case H to express the word-beginnings hydra- and hydro-
-//
-//```
-//Hj = hydration
-//Hkbn = hydrocarbon
-//```
-//
-//Word-beginnings with -gr- and -gn- Sounds
-//
+pub fn hydrx_to_upper_h(word: &str) -> String {
+    let return_string: String;
+    match word {
+        w if w.starts_with("hydra") => return_string = format!("H{}", &word[5..]).to_string(),
+        w if w.starts_with("hydro") => return_string = format!("H{}", &word[5..]).to_string(),
+        _ => return word.to_string(),
+    }
+    return_string.to_string()
+}
+
+#[test]
+pub fn test_hydrx_to_upper_h() {
+    assert_eq!(hydrx_to_upper_h("hydration"), "Htion");
+    assert_eq!(hydrx_to_upper_h("hydrocarbon"), "Hcarbon");
+    assert_eq!(hydrx_to_upper_h("unchanged"), "unchanged");
+}
+
 //(60) Write Ag to express aggra-, aggre-, agre-, agri-
+pub fn agxrx_to_upper_ag(word: &str) -> String {
+    let mut return_string: String = word.clone().to_string();
+    match word {
+        w if w.starts_with("aggra") => return_string = format!("Ag{}", &word[5..]).to_string(),
+        w if w.starts_with("aggre") => return_string = format!("Ag{}", &word[5..]).to_string(),
+        w if w.starts_with("agre") => return_string = format!("Ag{}", &word[4..]).to_string(),
+        w if w.starts_with("agri") => return_string = format!("Ag{}", &word[4..]).to_string(),
+        _ => return word.to_string(),
+    }
+    return_string.to_string()
+}
+
+#[test]
+pub fn test_agxrx_to_upper_ag() {
+    assert_eq!(agxrx_to_upper_ag("aggrevate"), "Agvate");
+    assert_eq!(agxrx_to_upper_ag("aggressive"), "Agssive");
+    assert_eq!(agxrx_to_upper_ag("agriculture"), "Agculture");
+    assert_eq!(agxrx_to_upper_ag("unchanged"), "unchanged");
+    // assert_eq!(agxrx_to_upper_ag("disagree"), "");
+}
+
+fn starts_with_any(word: &str, prefixes: &[&str]) -> bool {
+    prefixes.iter().any(|&prefix| word.starts_with(prefix))
+}
+
+//(61) Write Dg to express intial degra-, degre-. Very few words use this Principle.
+pub fn degrx_to_upper_dg(word: &str) -> String {
+    let prefixes = vec!["degra", "degre"];
+
+    if starts_with_any(word, &prefixes) {
+        if word.len() > 5 {
+            format!("Dg{}", &word[5..])
+        } else {
+            "Dg".to_string()
+        }
+    } else {
+        word.to_string()
+    }
+}
+
+#[test]
+pub fn test_degrx_to_upper_dg() {
+    assert_eq!(degrx_to_upper_dg("degrade"), "Dgde");
+    assert_eq!(degrx_to_upper_dg("degree"), "Dge");
+}
+
 //
 //```
 //Agva = aggravate
@@ -365,7 +388,6 @@ assert_eq!(testy("testycase"), "workscase");
 //Agkl = agriculture
 //```
 //
-//(61) Write Dg to express intial degra-, degre-. Very few words use this Principle.
 //
 //```
 //Dgdj = degradation
@@ -373,33 +395,117 @@ assert_eq!(testy("testycase"), "workscase");
 //```
 //
 //(80) Write Ig to express the word-beginnings igne-, igni-, igno-. Very few words use this Principle.
-//
-//```
-//Igx = igneous
-//Igt = ignite
-//Igc/ = ignorance
-//```
-//
+pub fn ignx_to_upper_ig(word: &str) -> String {
+    let prefixes = vec!["igne", "igni", "igno"];
+
+    if starts_with_any(word, &prefixes) {
+        if word.len() > 4 {
+            format!("Ig{}", &word[4..])
+        } else {
+            "Ig".to_string()
+        }
+    } else {
+        word.to_string()
+    }
+}
+
+#[test]
+pub fn test_ignx_to_upper_ig() {
+    assert_eq!(ignx_to_upper_ig("igneous"), "Igous");
+    assert_eq!(ignx_to_upper_ig("ignite"), "Igte");
+    assert_eq!(ignx_to_upper_ig("ignorance"), "Igrance");
+}
+
 //(81) Write Mg to express the word-beginnings magna-, magne-, magni-. The textbook does not mention using this Principle for magno- but the dictionary gives “magnolia” as an example of doing so.
-//
-//```
-//Mgn; = magnanimity
-//Mgtz = magnetize
-//Mgtu = magnitude
-//Mgla = magnolia
-//```
-//
+pub fn magnx_to_upper_mg(word: &str) -> String {
+    let prefixes = vec!["magna", "magne", "magni", "magno"];
+
+    if starts_with_any(word, &prefixes) {
+        if word.len() > 5 {
+            format!("Mg{}", &word[5..])
+        } else {
+            "Mg".to_string()
+        }
+    } else {
+        word.to_string()
+    }
+}
+
+#[test]
+pub fn test_mgnx_to_upper_mg() {
+    assert_eq!(magnx_to_upper_mg("magnanimity"), "Mgnimity");
+    assert_eq!(magnx_to_upper_mg("magnetize"), "Mgtize");
+    assert_eq!(magnx_to_upper_mg("magnitude"), "Mgtude");
+    assert_eq!(magnx_to_upper_mg("magnolia"), "Mglia");
+}
+
 //(82) Write Sg to express initial signa-, signe-, signi-
-//
-//```
-//Sgl = signal
-//Sgt = signet
-//Sgfk- = significant
-//```
+pub fn signx_to_upper_sg(word: &str) -> String {
+    let prefixes = vec!["signa, signe, signi"];
+
+    if starts_with_any(word, &prefixes) {
+        if word.len() > 5 {
+            format!("Sg{}", &word[5..])
+        } else {
+            "Sg".to_string()
+        }
+    } else {
+        word.to_string()
+    }
+}
+
+#[test]
+pub fn test_signx_to_upper_sg() {
+    assert_eq!(signx_to_upper_sg("signal"), "Sgl");
+    assert_eq!(signx_to_upper_sg("signet"), "Sgt");
+    assert_eq!(signx_to_upper_sg("significant"), "Sgficant");
+}
+
 //
 //Word-beginnings with s- Sounds
 //
 //(17) Write the letter s to express the prefix some-.
+pub fn s_to_some(word: &str) -> String {
+    let prefixes = vec!["some"];
+
+    if starts_with_any(word, &prefixes) {
+        if word.len() > 4 {
+            format!("s{}", &word[4..])
+        } else {
+            "s".to_string()
+        }
+    } else {
+        word.to_string()
+    }
+}
+
+#[test]
+pub fn test_s_to_some() {
+    assert_eq!(s_to_some("something"), "sthing");
+    assert_eq!(s_to_some("swhere"), "swhere");
+    assert_eq!(s_to_some("unchanged"), "unchanged");
+}
+
+// pub fn (word: &str) -> String {
+//     let prefixes = vec![""];
+
+//     if starts_with_any(word, &prefixes) {
+//         if word.len() > 4 {
+//             format!("{}", &word[4..])
+//         } else {
+//             "".to_string()
+//         }
+//     } else {
+//         word.to_string()
+//     }
+// }
+
+// #[test]
+// pub fn test_() {
+//     assert_eq!((""), "");
+//     assert_eq!((""), "");
+//     assert_eq!((""), "");
+// }
 //
 //```
 //sbd, = somebody
@@ -407,6 +513,26 @@ assert_eq!(testy("testycase"), "workscase");
 //```
 //
 //(77) The letter s represents the word-beginning sub-.
+// pub fn (word: &str) -> String {
+//     let prefixes = vec![""];
+
+//     if starts_with_any(word, &prefixes) {
+//         if word.len() > 4 {
+//             format!("{}", &word[4..])
+//         } else {
+//             "".to_string()
+//         }
+//     } else {
+//         word.to_string()
+//     }
+// }
+
+// #[test]
+// pub fn test_() {
+//     assert_eq!((""), "");
+//     assert_eq!((""), "");
+//     assert_eq!((""), "");
+// }
 //
 //```
 //sdu = subdue
@@ -415,6 +541,26 @@ assert_eq!(testy("testycase"), "workscase");
 //```
 //
 //(59) Write the letter s to express initial and medial ser- (and sur- when it sounds like ser-).
+// pub fn (word: &str) -> String {
+//     let prefixes = vec![""];
+
+//     if starts_with_any(word, &prefixes) {
+//         if word.len() > 4 {
+//             format!("{}", &word[4..])
+//         } else {
+//             "".to_string()
+//         }
+//     } else {
+//         word.to_string()
+//     }
+// }
+
+// #[test]
+// pub fn test_() {
+//     assert_eq!((""), "");
+//     assert_eq!((""), "");
+//     assert_eq!((""), "");
+// }
 //
 //```
 //ksv = conserve
