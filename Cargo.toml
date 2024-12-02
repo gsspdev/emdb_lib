@@ -21,6 +21,8 @@ exclude = [
 [dependencies]
 clap = { version = "4.5.21", features = ["derive"] }
 regex = "1.11.1"
+serde = { version = "1.0.215", features = ["alloc", "derive", "rc", "serde_derive", "unstable"] }
+str-utils = "0.1.7"
 unicode-segmentation = "1.12.0"
 
 [dev-dependencies]
