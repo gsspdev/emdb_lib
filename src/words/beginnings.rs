@@ -1,3 +1,13 @@
+// use std::ops::Deref;
+// use str_utils::*;
+
+#[test]
+fn test_replace_prefix() {
+    let original = "example";
+    let result = original;
+    assert_eq!(result, "nample");
+}
+
 // (40) Write the letter n to express initial en-, in-
 pub fn init_en_in_to_n(word: &str) -> String {
     match word {
@@ -333,27 +343,27 @@ pub fn test_hydrx_to_upper_h() {
     assert_eq!(hydrx_to_upper_h("unchanged"), "unchanged");
 }
 
-//(60) Write Ag to express aggra-, aggre-, agre-, agri-
-pub fn agxrx_to_upper_ag(word: &str) -> String {
-    let mut return_string: String = word.clone().to_string();
-    match word {
-        w if w.starts_with("aggra") => return_string = format!("Ag{}", &word[5..]).to_string(),
-        w if w.starts_with("aggre") => return_string = format!("Ag{}", &word[5..]).to_string(),
-        w if w.starts_with("agre") => return_string = format!("Ag{}", &word[4..]).to_string(),
-        w if w.starts_with("agri") => return_string = format!("Ag{}", &word[4..]).to_string(),
-        _ => return word.to_string(),
-    }
-    return_string.to_string()
-}
+// //(60) Write Ag to express aggra-, aggre-, agre-, agri-
+// pub fn agxrx_to_upper_ag(word: &str) -> String {
+//     let mut return_string: String = word.clone().to_string();
+//     match word {
+//         w if w.starts_with("aggra") => return_string = format!("Ag{}", &word[5..]).to_string(),
+//         w if w.starts_with("aggre") => return_string = format!("Ag{}", &word[5..]).to_string(),
+//         w if w.starts_with("agre") => return_string = format!("Ag{}", &word[4..]).to_string(),
+//         w if w.starts_with("agri") => return_string = format!("Ag{}", &word[4..]).to_string(),
+//         _ => return word.to_string(),
+//     }
+//     return_string.to_string()
+// }
 
-#[test]
-pub fn test_agxrx_to_upper_ag() {
-    assert_eq!(agxrx_to_upper_ag("aggrevate"), "Agvate");
-    assert_eq!(agxrx_to_upper_ag("aggressive"), "Agssive");
-    assert_eq!(agxrx_to_upper_ag("agriculture"), "Agculture");
-    assert_eq!(agxrx_to_upper_ag("unchanged"), "unchanged");
-    // assert_eq!(agxrx_to_upper_ag("disagree"), "");
-}
+// #[test]
+// pub fn test_agxrx_to_upper_ag() {
+//     assert_eq!(agxrx_to_upper_ag("aggrevate"), "Agvate");
+//     assert_eq!(agxrx_to_upper_ag("aggressive"), "Agssive");
+//     assert_eq!(agxrx_to_upper_ag("agriculture"), "Agculture");
+//     assert_eq!(agxrx_to_upper_ag("unchanged"), "unchanged");
+//     // assert_eq!(agxrx_to_upper_ag("disagree"), "");
+// }
 
 fn starts_with_any(word: &str, prefixes: &[&str]) -> bool {
     prefixes.iter().any(|&prefix| word.starts_with(prefix))
