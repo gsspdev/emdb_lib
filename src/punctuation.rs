@@ -1,9 +1,11 @@
 use regex::Regex;
 
+#[allow(dead_code)]
 pub fn test_module_file() {
     println!("punctuation.rs connected");
 }
 
+#[allow(dead_code)]
 pub fn substitute_punctuation(content: &str) -> String {
     // Define the regex pattern to match punctuation at the end of paragraphs
     let content = content;

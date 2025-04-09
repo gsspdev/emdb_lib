@@ -1,3 +1,4 @@
+#[allow(dead_code)]
 pub fn test_module_file() {
     println!("types.rs connected");
 }
